@@ -22,8 +22,8 @@ class LoginForm extends Component {
   };
 
   handleRadio = (event) => {
-    console.log(event.target.value);
-    this.setState({gender: event.target.value})
+    // console.log(event.target.value);
+    this.setState({ gender: event.target.value });
   };
 
   handleSubmit = (e) => {
@@ -32,7 +32,7 @@ class LoginForm extends Component {
     this.props.createUser({
       email: this.state.email,
       password: this.state.password,
-      gender: this.state.gender
+      gender: this.state.gender,
     });
 
     this.setState({
@@ -96,7 +96,7 @@ class LoginForm extends Component {
             type="radio"
             name="flexRadioDefault"
             id="flexRadioDefault1"
-            checked={this.state.gender==="male"}
+            checked={this.state.gender === "male"}
             onChange={this.handleRadio}
             value="male"
           />
@@ -110,7 +110,7 @@ class LoginForm extends Component {
             type="radio"
             name="flexRadioDefault"
             id="flexRadioDefault2"
-            checked={this.state.gender==="female"}
+            checked={this.state.gender === "female"}
             onChange={this.handleRadio}
             value="female"
           />
