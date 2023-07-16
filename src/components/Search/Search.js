@@ -1,7 +1,22 @@
 import { Component } from "react";
 
 class Search extends Component {
-  state = {};
+  state = {
+    value: "",
+  };
+
+  handleChange = (event) => {
+    const { value } = event.target;
+
+    this.setState({ value });
+  };
+
+  handleSubmit = (event) => {
+      event.preventDefault();
+      
+      this.props.handleSearch(this.state.value);
+    // console.log(this.state);
+  };
 
   render() {
     return (
@@ -9,15 +24,15 @@ class Search extends Component {
         <form
           className="d-flex mt-2"
           role="search"
-          //   onSubmit={this.handleSubmit}
+          onSubmit={this.handleSubmit}
         >
           <input
             className="form-control me-2 "
             type="search"
             placeholder="Search"
             aria-label="Search"
-            // onChange={this.handleChange}
-            // value={this.state.value}
+            onChange={this.handleChange}
+            value={this.state.value}
           />
           <button className="btn btn-outline-success" type="submit">
             Search
