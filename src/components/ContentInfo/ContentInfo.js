@@ -1,4 +1,4 @@
-import { Component, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { getNews } from "../../servises/getNews/getNews";
 import ErrorCard from "../ErrorCard/ErrorCard";
 
@@ -8,7 +8,7 @@ import { useCustomContext } from "../../testContext/Context/Context";
 const ContentInfo = ({ searchText }) => {
   // const  [news, setNews]  = useState(null);
   // Вынесен в контекст, чтоб оставались новости при переходе на другой маршрут и обратно
-  const {news, setNews} = useCustomContext();
+  const { news, setNews } = useCustomContext();
 
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
@@ -20,7 +20,7 @@ const ContentInfo = ({ searchText }) => {
     setError("");
     setIsLoading(true);
 
-    const request = getNews(searchText)
+    getNews(searchText)
       .then((response) => response.json())
       .then((data) => {
         if (data.status === "ok") {
@@ -36,7 +36,7 @@ const ContentInfo = ({ searchText }) => {
       });
 
     setRequest(request);
-  }, [searchText, setNews]);
+  }, [request, searchText, setNews]);
 
   return (
     <>

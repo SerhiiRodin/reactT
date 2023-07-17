@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { Suspense, useState } from "react";
 import { Outlet } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
 import { nanoid } from "nanoid";
@@ -29,8 +29,10 @@ const Layout = () => {
   return (
     <div className="container">
       <Toaster position="top-right" toastOptions={{ duration: 1500 }} />
-          <Header showModal={showModal} />
-      <Outlet />
+      <Header showModal={showModal} />
+      <Suspense>
+        <Outlet />
+      </Suspense>
       {isShowModal && (
         <Modal closeModal={closeModal}>
           <LoginForm createUser={createUser} closeModal={closeModal} />

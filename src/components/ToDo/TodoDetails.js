@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 import ToDo from "./ToDo";
 
 const TodoDetails = () => {
   const [todoList, setTodoList] = useState(null);
 
   const params = useParams();
-  console.log(params);
+  //   console.log(params);
 
   // Если локал не пустой, то записываем его в todoList при didMount
   useEffect(() => {
@@ -16,8 +16,14 @@ const TodoDetails = () => {
     }
   }, []);
 
+  const location = useLocation();
+  console.log(location);
+
   return (
     <>
+      <Link to={location.state} className="btn btn-secondary m-2">
+        Back
+      </Link>
       {todoList &&
         todoList.map(
           (todo) => todo.id === params.id && <ToDo key={todo.id} todo={todo} />

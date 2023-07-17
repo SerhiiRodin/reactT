@@ -4,9 +4,19 @@ import { toast } from "react-hot-toast";
 
 import ToDo from "../ToDo/ToDo";
 import FormToDo from "../FormToDo/FormToDo";
+import FormFilterToDo from "../FormToDo/FormFilterTodo";
+import { useSearchParams } from "react-router-dom";
 
 const ToDoList = () => {
   const [todoList, setTodoList] = useState("");
+  const [filteredToDoList, setFilteredToDoList] = useState(null);
+
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const searchParamsValue = searchParams.get("filter") ?? "";
+
+  // const dd = Object.fromEntries([...searchParams])
+  // console.log(dd);
 
   // Если локал не пустой, то записываем его в todoList при didMount
   useEffect(() => {
@@ -21,6 +31,17 @@ const ToDoList = () => {
   useEffect(() => {
     todoList && localStorage.setItem("todo", JSON.stringify(todoList));
   }, [todoList]);
+
+  useEffect(() => {
+    todoList &&
+      setFilteredToDoList(
+        todoList.filter((todo) =>
+          todo.title
+            .toLowerCase()
+            .includes(searchParamsValue.trim().toLowerCase())
+        )
+      );
+  }, [searchParamsValue, todoList]);
 
   const handleCheck = (id) => {
     setTodoList((prevTodoList) => {
@@ -56,11 +77,14 @@ const ToDoList = () => {
   return (
     <>
       <h1>My To-Do list</h1>
-
+      <FormFilterToDo
+        setSearchParams={setSearchParams}
+        searchParamsValue={searchParamsValue}
+      />
       <FormToDo addTodo={addTodo} />
-      {todoList && (
+      {filteredToDoList && (
         <ul className="list-group list-group-flush">
-          {todoList.map((todo) => (
+          {filteredToDoList.map((todo) => (
             <ToDo
               key={todo.id}
               todo={todo}
