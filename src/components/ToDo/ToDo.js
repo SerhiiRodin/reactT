@@ -1,9 +1,15 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
+import { updateCompleted } from "../../redux/todo/actions";
 
 const ToDo = ({ todo, handleCheck, handleDelete }) => {
   const location = useLocation();
   // console.log(location);
+
+  const handleCheckboxChange = () => {
+    handleCheck(todo.id);
+  };
 
   return (
     <li className="list-group-item">
@@ -14,7 +20,7 @@ const ToDo = ({ todo, handleCheck, handleDelete }) => {
               className="form-check-input me-2"
               type="checkbox"
               checked={todo.completed}
-              onChange={() => handleCheck(todo.id)}
+              onChange={handleCheckboxChange}
             />
           )}
           <Link to={todo.id} state={location}>

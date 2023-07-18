@@ -6,7 +6,7 @@ import ToDo from "../ToDo/ToDo";
 import FormToDo from "../FormToDo/FormToDo";
 import FormFilterToDo from "../FormToDo/FormFilterTodo";
 import { useSearchParams } from "react-router-dom";
-import { createTodo } from "../../redux/todo/actions";
+import { createTodo, updateCompleted } from "../../redux/todo/actions";
 import { useDispatch, useSelector } from "react-redux";
 
 const ToDoList = () => {
@@ -52,6 +52,12 @@ const ToDoList = () => {
     //     return el.id === id ? { ...el, completed: !el.completed } : el;
     //   });
     // });
+        const todoItem = todoList.find((todo) => todo.id === id);
+        if (todoItem) {
+          const updatedCompleted = !todoItem.completed;
+          dispatch(updateCompleted(id, updatedCompleted));
+        }
+
   };
 
   const handleDelete = (id) => {

@@ -11,6 +11,18 @@ export const createTodo = createAction("CREATETODO", (value) => {
   };
 });
 
+export const updateCompleted = createAction(
+  "UPDATECOMPLETED",
+  (id, completed) => {
+    return {
+      payload: {
+        id: id,
+        completed: completed,
+      },
+    };
+  }
+);
+
 // export const createTodo = (todo) => {
 //   return { type: CREATETODO, payload: todo };
 // };
