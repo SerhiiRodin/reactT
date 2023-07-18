@@ -8,15 +8,19 @@ import App from "./components/AppRout";
 
 import reportWebVitals from "./reportWebVitals";
 import Context from "./testContext/Context/Context";
+import { store } from "./redux/store";
+import { Provider } from "react-redux";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   // <React.StrictMode>
-  <BrowserRouter>
-    <Context>
-      <App />
-    </Context>
-  </BrowserRouter>
+  <Provider store={store}>
+    <BrowserRouter>
+      <Context>
+        <App />
+      </Context>
+    </BrowserRouter>
+  </Provider>
   // </React.StrictMode>
 );
 
