@@ -1,7 +1,7 @@
 import { createReducer } from "@reduxjs/toolkit";
 
 import { todoInitialState } from "./todoInitialState";
-import { createTodo, updateCompleted } from "./actions";
+import { createTodo, deleteTodo, updateCompleted } from "./actions";
 
 export const todoReducer = createReducer(todoInitialState, {
   // [createTodo]: (state, action) => {
@@ -20,6 +20,11 @@ export const todoReducer = createReducer(todoInitialState, {
     if (todoItem) {
       todoItem.completed = completed;
     }
+  },
+
+  [deleteTodo]: (state, action) => {
+    const id = action.payload;
+    state.todo = state.todo.filter((todo) => todo.id !== id);
   },
 });
 

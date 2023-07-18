@@ -1,4 +1,4 @@
-import { configureStore } from "@reduxjs/toolkit";
+import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
 import { reducer } from "./reducer";
 
 import { persistStore, persistReducer } from "redux-persist";
@@ -12,7 +12,12 @@ const persistConfig = {
 
 const persistedReducer = persistReducer(persistConfig, reducer);
 
-export const store = configureStore({ reducer: persistedReducer });
+export const store = configureStore({
+  reducer: persistedReducer,
+  middleware: getDefaultMiddleware({
+    serializableCheck: false, // Разрешить сохранение несериализуемых данных
+  }),
+});
 
 export const persistor = persistStore(store);
 

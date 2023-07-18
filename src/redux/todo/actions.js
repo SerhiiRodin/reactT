@@ -23,6 +23,10 @@ export const updateCompleted = createAction(
   }
 );
 
+export const deleteTodo = createAction("DELETETODO", (id) => {
+  return { payload: id };
+});
+
 // export const createTodo = (todo) => {
 //   return { type: CREATETODO, payload: todo };
 // };
