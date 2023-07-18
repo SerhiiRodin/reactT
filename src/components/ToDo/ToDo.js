@@ -1,7 +1,6 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+
 import { Link, useLocation } from "react-router-dom";
-import { updateCompleted } from "../../redux/todo/actions";
 
 const ToDo = ({ todo, handleCheck, handleDelete }) => {
   const location = useLocation();
