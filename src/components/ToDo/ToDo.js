@@ -28,7 +28,7 @@ const ToDo = ({ todo, handleCheck, handleDelete }) => {
               type="button"
               className="btn-close"
               aria-label="Close"
-              onClick={() => handleDelete(todo.id)}
+              // onClick={() => handleDelete(todo.id)}
             ></button>
           )}
         </div>

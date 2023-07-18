@@ -1,36 +1,39 @@
 import React, { useEffect, useState } from "react";
-import { nanoid } from "nanoid";
+// import { nanoid } from "nanoid";
 import { toast } from "react-hot-toast";
 
 import ToDo from "../ToDo/ToDo";
 import FormToDo from "../FormToDo/FormToDo";
 import FormFilterToDo from "../FormToDo/FormFilterTodo";
 import { useSearchParams } from "react-router-dom";
+import { createTodo } from "../../redux/todo/actions";
+import { useDispatch, useSelector } from "react-redux";
 
 const ToDoList = () => {
-  const [todoList, setTodoList] = useState("");
+  // const [todoList, setTodoList] = useState("");
+  const { todo: todoList } = useSelector((state) => state.todo);
+
+  const dispatch = useDispatch();
+
   const [filteredToDoList, setFilteredToDoList] = useState(null);
 
   const [searchParams, setSearchParams] = useSearchParams();
 
   const searchParamsValue = searchParams.get("filter") ?? "";
 
-  // const dd = Object.fromEntries([...searchParams])
-  // console.log(dd);
-
   // Если локал не пустой, то записываем его в todoList при didMount
-  useEffect(() => {
-    const localTodo = localStorage.getItem("todo");
-    if (localTodo) {
-      setTodoList(JSON.parse(localTodo));
-    }
-  }, []);
+  // useEffect(() => {
+  //   const localTodo = localStorage.getItem("todo");
+  //   if (localTodo) {
+  //     setTodoList(JSON.parse(localTodo));
+  //   }
+  // }, []);
 
   // Записываем в локал, если изменения с todoList.
   // При didMount, если todoList пустой, то не записываем в локал
-  useEffect(() => {
-    todoList && localStorage.setItem("todo", JSON.stringify(todoList));
-  }, [todoList]);
+  // useEffect(() => {
+  //   todoList && localStorage.setItem("todo", JSON.stringify(todoList));
+  // }, [todoList]);
 
   useEffect(() => {
     todoList &&
@@ -44,32 +47,35 @@ const ToDoList = () => {
   }, [searchParamsValue, todoList]);
 
   const handleCheck = (id) => {
-    setTodoList((prevTodoList) => {
-      return prevTodoList.map((el) => {
-        return el.id === id ? { ...el, completed: !el.completed } : el;
-      });
-    });
+    // setTodoList((prevTodoList) => {
+    //   return prevTodoList.map((el) => {
+    //     return el.id === id ? { ...el, completed: !el.completed } : el;
+    //   });
+    // });
   };
 
   const handleDelete = (id) => {
-    setTodoList((prevTodoList) => {
-      return prevTodoList.filter((el) => el.id !== id);
-    });
+    // setTodoList((prevTodoList) => {
+    //   return prevTodoList.filter((el) => el.id !== id);
+    // });
 
     toast.error("Todo delete successfully.");
   };
 
   const addTodo = (value) => {
-    setTodoList((prevTodoList) => {
-      return [
-        ...prevTodoList,
-        {
-          id: nanoid(),
-          title: value,
-          completed: false,
-        },
-      ];
-    });
+    // setTodoList((prevTodoList) => {
+    //   return [
+    //     ...prevTodoList,
+    //     {
+    //       id: nanoid(),
+    //       title: value,
+    //       completed: false,
+    //     },
+    //   ];
+    // });
+
+    // createTodo();
+    dispatch(createTodo(value))
 
     toast.success("Todo create successfully.");
   };
