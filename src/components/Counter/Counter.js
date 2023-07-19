@@ -8,9 +8,6 @@ const Counter = () => {
 
   const { value, step } = useSelector((state) => state.counter);
 
-  console.log(step);
-  console.log(value);
-
   const dispatch = useDispatch();
 
   const handleClickIncrement = () => {

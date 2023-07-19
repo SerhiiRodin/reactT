@@ -1,6 +1,10 @@
+import { useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom";
+import { getNewsThunk } from "../../redux/news/thunk";
 
 const Header = ({ showModal }) => {
+  const dispatch = useDispatch();
+
   return (
     <nav className="navbar bg-dark mb-3 navbar-expand-lg">
       <div className="container-fluid">
@@ -21,6 +25,14 @@ const Header = ({ showModal }) => {
 
         <button className="btn btn-outline-success" onClick={showModal}>
           Open Modal
+        </button>
+        <button
+          className="btn btn-outline-success"
+          onClick={() => {
+            dispatch(getNewsThunk());
+          }}
+        >
+          Thunk
         </button>
       </div>
     </nav>
