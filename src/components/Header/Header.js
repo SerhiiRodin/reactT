@@ -20,6 +20,9 @@ const Header = ({ showModal }) => {
             <NavLink className="nav-link text-white" to="/todo">
               ToDo
             </NavLink>
+            <NavLink className="nav-link text-white" to="/products">
+              Products
+            </NavLink>
           </div>
         </div>
 
