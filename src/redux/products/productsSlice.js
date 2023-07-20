@@ -98,3 +98,4 @@ export const productSlice = createSlice({
 });
 
 export const productReducer = productSlice.reducer;
+
